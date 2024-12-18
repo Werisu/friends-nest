@@ -7,6 +7,7 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
+import { ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { IsUUIDParam } from '../../common/decorators/is-uuidparam.decorator';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -21,6 +22,15 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
+  @ApiOperation({
+    summary: 'Get all users :D',
+    operationId: 'getAllUsers',
+    description: 'Get all users',
+  })
+  @ApiOkResponse({
+    type: [CreateUserDto],
+    description: 'User was created successfully',
+  })
   @Get()
   findAll() {
     return this.userService.findAll();
