@@ -24,6 +24,9 @@ export class User extends CommonEntity implements UserInterface {
   @Column({ type: 'varchar', nullable: false })
   email: string;
 
+  @Column({ type: 'varchar', nullable: true })
+  dob!: string;
+
   @Column({ default: true, nullable: false })
   active: boolean;
 
