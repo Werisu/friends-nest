@@ -1,15 +1,22 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { randomUUID } from 'crypto';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { plainToInstance } from 'class-transformer';
+import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UserDto } from './dto/user.dto';
 import { User } from './entities/user.entity';
 
 @Injectable()
 export class UserRepository {
-  public users: User[];
-  constructor() {
-    this.users = [];
-  }
+  constructor(
+    @InjectRepository(User)
+    private repo: Repository<User>
+  ) {}
 
   /**
    * Method to convert dto to user entity
@@ -28,34 +35,48 @@ export class UserRepository {
 
     return user;
   }
-  create(createUserDto: CreateUserDto): User {
-    const user = this.convertToUser(createUserDto);
-    user.id = randomUUID();
-    this.users.push(user);
-    return user;
+  async create(createUserDto: CreateUserDto): Promise<UserDto> {
+    try {
+      const user = this.repo.create(createUserDto);
+      const dbUser = await this.repo.save(user);
+      return plainToInstance(UserDto, dbUser);
+    } catch (error) {
+      throw new InternalServerErrorException('Error creating user');
+    }
   }
 
-  findAll() {
-    return this.users;
+  async findAll() {
+    const users = await this.repo.find({
+      // select: ['id', 'username', 'firstName', 'lastName', 'email', 'active'],
+    });
+    return plainToInstance(UserDto, users);
   }
 
-  findOne(id: string) {
-    const user = this.users.find((user) => user.id === id);
+  async findById(id: string) {
+    const user = await this.repo.findOneBy({
+      id: id,
+    });
     if (!user) throw new NotFoundException('User not found');
     return user;
   }
 
-  update(id: string, updateUserDto: UpdateUserDto) {
-    const user = this.findOne(id);
-    if (updateUserDto.firstName) user.firstName = updateUserDto.firstName;
-    if (updateUserDto.lastName) user.lastName = updateUserDto.lastName;
-    return user;
+  async findOne(id: string) {
+    const user = await this.findById(id);
+    return plainToInstance(UserDto, user);
   }
 
-  remove(id: string) {
-    const index = this.users.findIndex((user) => user.id === id);
-    if (index < 0) throw new NotFoundException('User not found');
-    this.users.splice(index, 1);
-    return true;
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    const user = await this.findById(id);
+    const newUser: User = {
+      ...user,
+      ...updateUserDto,
+    };
+    this.repo.save(newUser);
+    return plainToInstance(UserDto, newUser);
+  }
+
+  async remove(id: string) {
+    const user = await this.findById(id);
+    await this.repo.remove(user);
   }
 }

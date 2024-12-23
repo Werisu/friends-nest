@@ -1,0 +1,123 @@
+[2024-12-23T18:31:02.647Z][QUERY]: SELECT SCHEMA_NAME() AS "schema_name"
+[2024-12-23T18:31:02.675Z][QUERY]: BEGIN TRANSACTION
+[2024-12-23T18:31:02.679Z][QUERY]: SELECT * FROM "friends"."INFORMATION_SCHEMA"."TABLES" WHERE "TABLE_NAME" = 'typeorm_metadata' AND "TABLE_SCHEMA" = 'dbo'
+[2024-12-23T18:31:02.699Z][QUERY]: COMMIT
+[2024-12-23T18:47:58.618Z][QUERY]: SELECT SCHEMA_NAME() AS "schema_name"
+[2024-12-23T18:48:01.701Z][QUERY]: SELECT SCHEMA_NAME() AS "schema_name"
+[2024-12-23T18:48:04.752Z][QUERY]: SELECT SCHEMA_NAME() AS "schema_name"
+[2024-12-23T18:48:07.795Z][QUERY]: SELECT SCHEMA_NAME() AS "schema_name"
+[2024-12-23T18:48:10.831Z][QUERY]: SELECT SCHEMA_NAME() AS "schema_name"
+[2024-12-23T18:48:13.861Z][QUERY]: SELECT SCHEMA_NAME() AS "schema_name"
+[2024-12-23T18:48:16.919Z][QUERY]: SELECT SCHEMA_NAME() AS "schema_name"
+[2024-12-23T18:48:19.972Z][QUERY]: SELECT SCHEMA_NAME() AS "schema_name"
+[2024-12-23T18:48:28.317Z][QUERY]: SELECT SCHEMA_NAME() AS "schema_name"
+[2024-12-23T18:48:28.350Z][QUERY]: BEGIN TRANSACTION
+[2024-12-23T18:48:28.354Z][QUERY]: SELECT SCHEMA_NAME() AS "schema_name"
+[2024-12-23T18:48:28.356Z][QUERY]: SELECT DB_NAME() AS "db_name"
+[2024-12-23T18:48:28.357Z][QUERY]: 
+                    SELECT DISTINCT
+                        "TABLE_CATALOG", "TABLE_SCHEMA", "TABLE_NAME"
+                    FROM "friends"."INFORMATION_SCHEMA"."TABLES"
+                    WHERE
+                          "TABLE_TYPE" = 'BASE TABLE' AND
+                          "TABLE_CATALOG" = 'friends' AND
+                          ("TABLE_SCHEMA" = 'dbo' AND "TABLE_NAME" = 'user')
+                
+[2024-12-23T18:48:28.369Z][QUERY]: SELECT * FROM "friends"."INFORMATION_SCHEMA"."TABLES" WHERE "TABLE_NAME" = 'typeorm_metadata' AND "TABLE_SCHEMA" = 'dbo'
+[2024-12-23T18:48:28.378Z][QUERY]: CREATE TABLE "user" ("id" uniqueidentifier NOT NULL CONSTRAINT "DF_cace4a159ff9f2512dd42373760" DEFAULT NEWSEQUENTIALID(), "createdAt" datetime2 NOT NULL CONSTRAINT "DF_e11e649824a45d8ed01d597fd93" DEFAULT getdate(), "updatedAt" datetime2 NOT NULL CONSTRAINT "DF_80ca6e6ef65fb9ef34ea8c90f42" DEFAULT getdate(), "username" varchar(255) NOT NULL, "password" varchar(255) NOT NULL, "salt" varchar(255), "firstName" varchar(255) NOT NULL, "lastName" varchar(255) NOT NULL, "email" varchar(255) NOT NULL, "active" bit NOT NULL CONSTRAINT "DF_843f46779f60b45032874be95b3" DEFAULT 1, CONSTRAINT "UQ_e12875dfb3b1d92d7d7c5377e22" UNIQUE ("email"), CONSTRAINT "UQ_78a916df40e02a9deb1c4b75edb" UNIQUE ("username"), CONSTRAINT "PK_cace4a159ff9f2512dd42373760" PRIMARY KEY ("id"))
+[2024-12-23T18:48:28.402Z][QUERY]: COMMIT
+[2024-12-23T19:19:25.991Z][QUERY]: SELECT SCHEMA_NAME() AS "schema_name"
+[2024-12-23T19:19:26.024Z][QUERY]: BEGIN TRANSACTION
+[2024-12-23T19:19:26.028Z][QUERY]: SELECT SCHEMA_NAME() AS "schema_name"
+[2024-12-23T19:19:26.030Z][QUERY]: SELECT DB_NAME() AS "db_name"
+[2024-12-23T19:19:26.032Z][QUERY]: 
+                    SELECT DISTINCT
+                        "TABLE_CATALOG", "TABLE_SCHEMA", "TABLE_NAME"
+                    FROM "friends"."INFORMATION_SCHEMA"."TABLES"
+                    WHERE
+                          "TABLE_TYPE" = 'BASE TABLE' AND
+                          "TABLE_CATALOG" = 'friends' AND
+                          ("TABLE_SCHEMA" = 'dbo' AND "TABLE_NAME" = 'user')
+                
+[2024-12-23T19:19:26.043Z][QUERY]: SELECT "COLUMNS".*, "cc"."is_persisted", "cc"."definition" FROM "friends"."INFORMATION_SCHEMA"."COLUMNS" LEFT JOIN "sys"."computed_columns" "cc" ON COL_NAME("cc"."object_id", "cc"."column_id") = "column_name" WHERE (("TABLE_SCHEMA" = 'dbo' AND "TABLE_NAME" = 'user'))
+[2024-12-23T19:19:26.098Z][QUERY]: SELECT "columnUsages".*, "tableConstraints"."CONSTRAINT_TYPE", "chk"."definition" FROM "friends"."INFORMATION_SCHEMA"."CONSTRAINT_COLUMN_USAGE" "columnUsages" INNER JOIN "friends"."INFORMATION_SCHEMA"."TABLE_CONSTRAINTS" "tableConstraints" ON "tableConstraints"."CONSTRAINT_NAME" = "columnUsages"."CONSTRAINT_NAME" AND "tableConstraints"."TABLE_SCHEMA" = "columnUsages"."TABLE_SCHEMA" AND "tableConstraints"."TABLE_NAME" = "columnUsages"."TABLE_NAME" LEFT JOIN "friends"."sys"."check_constraints" "chk" ON "chk"."object_id" = OBJECT_ID("columnUsages"."TABLE_CATALOG" + '.' + "columnUsages"."TABLE_SCHEMA" + '.' + "columnUsages"."CONSTRAINT_NAME") WHERE (("columnUsages"."TABLE_SCHEMA" = 'dbo' AND "columnUsages"."TABLE_NAME" = 'user')) AND "tableConstraints"."CONSTRAINT_TYPE" IN ('PRIMARY KEY', 'UNIQUE', 'CHECK')
+[2024-12-23T19:19:26.247Z][QUERY]: SELECT "fk"."name" AS "FK_NAME", 'friends' AS "TABLE_CATALOG", "s1"."name" AS "TABLE_SCHEMA", "t1"."name" AS "TABLE_NAME", "col1"."name" AS "COLUMN_NAME", "s2"."name" AS "REF_SCHEMA", "t2"."name" AS "REF_TABLE", "col2"."name" AS "REF_COLUMN", "fk"."delete_referential_action_desc" AS "ON_DELETE", "fk"."update_referential_action_desc" AS "ON_UPDATE" FROM "friends"."sys"."foreign_keys" "fk" INNER JOIN "friends"."sys"."foreign_key_columns" "fkc" ON "fkc"."constraint_object_id" = "fk"."object_id" INNER JOIN "friends"."sys"."tables" "t1" ON "t1"."object_id" = "fk"."parent_object_id" INNER JOIN "friends"."sys"."schemas" "s1" ON "s1"."schema_id" = "t1"."schema_id" INNER JOIN "friends"."sys"."tables" "t2" ON "t2"."object_id" = "fk"."referenced_object_id" INNER JOIN "friends"."sys"."schemas" "s2" ON "s2"."schema_id" = "t2"."schema_id" INNER JOIN "friends"."sys"."columns" "col1" ON "col1"."column_id" = "fkc"."parent_column_id" AND "col1"."object_id" = "fk"."parent_object_id" INNER JOIN "friends"."sys"."columns" "col2" ON "col2"."column_id" = "fkc"."referenced_column_id" AND "col2"."object_id" = "fk"."referenced_object_id" WHERE (("s1"."name" = 'dbo' AND "t1"."name" = 'user'))
+[2024-12-23T19:19:26.303Z][QUERY]: SELECT "TABLE_CATALOG", "TABLE_SCHEMA", "COLUMN_NAME", "TABLE_NAME" FROM "friends"."INFORMATION_SCHEMA"."COLUMNS" WHERE EXISTS(SELECT 1 FROM "friends"."sys"."columns" "S" WHERE OBJECT_ID("TABLE_CATALOG" + '.' + "TABLE_SCHEMA" + '.' + "TABLE_NAME") = "S"."OBJECT_ID" AND "COLUMN_NAME" = "S"."NAME" AND "S"."is_identity" = 1) AND (("TABLE_SCHEMA" = 'dbo' AND "TABLE_NAME" = 'user'))
+[2024-12-23T19:19:26.328Z][QUERY]: SELECT "NAME", "COLLATION_NAME" FROM "sys"."databases"
+[2024-12-23T19:19:26.351Z][QUERY]: SELECT 'friends' AS "TABLE_CATALOG", "s"."name" AS "TABLE_SCHEMA", "t"."name" AS "TABLE_NAME", "ind"."name" AS "INDEX_NAME", "col"."name" AS "COLUMN_NAME", "ind"."is_unique" AS "IS_UNIQUE", "ind"."filter_definition" as "CONDITION" FROM "friends"."sys"."indexes" "ind" INNER JOIN "friends"."sys"."index_columns" "ic" ON "ic"."object_id" = "ind"."object_id" AND "ic"."index_id" = "ind"."index_id" INNER JOIN "friends"."sys"."columns" "col" ON "col"."object_id" = "ic"."object_id" AND "col"."column_id" = "ic"."column_id" INNER JOIN "friends"."sys"."tables" "t" ON "t"."object_id" = "ind"."object_id" INNER JOIN "friends"."sys"."schemas" "s" ON "s"."schema_id" = "t"."schema_id" WHERE "ind"."is_primary_key" = 0 AND "ind"."is_unique_constraint" = 0 AND "t"."is_ms_shipped" = 0 AND (("s"."name" = 'dbo' AND "t"."name" = 'user'))
+[2024-12-23T19:19:26.387Z][QUERY]: SELECT * FROM "friends"."INFORMATION_SCHEMA"."TABLES" WHERE "TABLE_NAME" = 'typeorm_metadata' AND "TABLE_SCHEMA" = 'dbo'
+[2024-12-23T19:19:26.398Z][QUERY]: COMMIT
+[2024-12-23T19:23:12.028Z][QUERY]: BEGIN TRANSACTION
+[2024-12-23T19:23:12.044Z][QUERY]: DECLARE @OutputTable TABLE ("id" uniqueidentifier, "createdAt" datetime2, "updatedAt" datetime2, "salt" varchar(255), "active" bit);
+
+INSERT INTO "user"("id", "createdAt", "updatedAt", "username", "password", "salt", "firstName", "lastName", "email", "active") OUTPUT INSERTED."id", INSERTED."createdAt", INSERTED."updatedAt", INSERTED."salt", INSERTED."active" INTO @OutputTable VALUES (DEFAULT, DEFAULT, DEFAULT, @0, @1, DEFAULT, @2, @3, @4, DEFAULT);
+
+SELECT * FROM @OutputTable -- PARAMETERS: [{"value":"Enjuru","type":"varchar","params":[]},{"value":"W@3$%e36","type":"varchar","params":[]},{"value":"Wellysson","type":"varchar","params":[]},{"value":"Nascimento Rocha","type":"varchar","params":[]},{"value":"teste@teste.com","type":"varchar","params":[]}]
+[2024-12-23T19:23:12.060Z][QUERY]: COMMIT
+[2024-12-23T19:24:02.555Z][QUERY]: SELECT "User"."id" AS "User_id", "User"."createdAt" AS "User_createdAt", "User"."updatedAt" AS "User_updatedAt", "User"."username" AS "User_username", "User"."password" AS "User_password", "User"."salt" AS "User_salt", "User"."firstName" AS "User_firstName", "User"."lastName" AS "User_lastName", "User"."email" AS "User_email", "User"."active" AS "User_active" FROM "user" "User"
+[2024-12-23T19:24:34.346Z][QUERY]: BEGIN TRANSACTION
+[2024-12-23T19:24:34.357Z][QUERY]: DECLARE @OutputTable TABLE ("id" uniqueidentifier, "createdAt" datetime2, "updatedAt" datetime2, "salt" varchar(255), "active" bit);
+
+INSERT INTO "user"("id", "createdAt", "updatedAt", "username", "password", "salt", "firstName", "lastName", "email", "active") OUTPUT INSERTED."id", INSERTED."createdAt", INSERTED."updatedAt", INSERTED."salt", INSERTED."active" INTO @OutputTable VALUES (DEFAULT, DEFAULT, DEFAULT, @0, @1, DEFAULT, @2, @3, @4, DEFAULT);
+
+SELECT * FROM @OutputTable -- PARAMETERS: [{"value":"remotelife","type":"varchar","params":[]},{"value":"W@3$%e36","type":"varchar","params":[]},{"value":"Enjuru","type":"varchar","params":[]},{"value":"Kuma","type":"varchar","params":[]},{"value":"teste@teste.com","type":"varchar","params":[]}]
+[2024-12-23T19:24:34.408Z][FAILED QUERY]: DECLARE @OutputTable TABLE ("id" uniqueidentifier, "createdAt" datetime2, "updatedAt" datetime2, "salt" varchar(255), "active" bit);
+
+INSERT INTO "user"("id", "createdAt", "updatedAt", "username", "password", "salt", "firstName", "lastName", "email", "active") OUTPUT INSERTED."id", INSERTED."createdAt", INSERTED."updatedAt", INSERTED."salt", INSERTED."active" INTO @OutputTable VALUES (DEFAULT, DEFAULT, DEFAULT, @0, @1, DEFAULT, @2, @3, @4, DEFAULT);
+
+SELECT * FROM @OutputTable -- PARAMETERS: [{"value":"remotelife","type":"varchar","params":[]},{"value":"W@3$%e36","type":"varchar","params":[]},{"value":"Enjuru","type":"varchar","params":[]},{"value":"Kuma","type":"varchar","params":[]},{"value":"teste@teste.com","type":"varchar","params":[]}]
+[2024-12-23T19:24:34.408Z][QUERY ERROR]: QueryFailedError: Error: Violation of UNIQUE KEY constraint 'UQ_e12875dfb3b1d92d7d7c5377e22'. Cannot insert duplicate key in object 'dbo.user'. The duplicate key value is (teste@teste.com).
+[2024-12-23T19:24:34.410Z][QUERY]: ROLLBACK
+[2024-12-23T19:24:53.040Z][QUERY]: BEGIN TRANSACTION
+[2024-12-23T19:24:53.048Z][QUERY]: DECLARE @OutputTable TABLE ("id" uniqueidentifier, "createdAt" datetime2, "updatedAt" datetime2, "salt" varchar(255), "active" bit);
+
+INSERT INTO "user"("id", "createdAt", "updatedAt", "username", "password", "salt", "firstName", "lastName", "email", "active") OUTPUT INSERTED."id", INSERTED."createdAt", INSERTED."updatedAt", INSERTED."salt", INSERTED."active" INTO @OutputTable VALUES (DEFAULT, DEFAULT, DEFAULT, @0, @1, DEFAULT, @2, @3, @4, DEFAULT);
+
+SELECT * FROM @OutputTable -- PARAMETERS: [{"value":"remotelife","type":"varchar","params":[]},{"value":"W@3$%e36","type":"varchar","params":[]},{"value":"Enjuru","type":"varchar","params":[]},{"value":"Kuma","type":"varchar","params":[]},{"value":"teste_enjuru@teste.com","type":"varchar","params":[]}]
+[2024-12-23T19:24:53.074Z][QUERY]: COMMIT
+[2024-12-23T19:25:17.378Z][QUERY]: SELECT "User"."id" AS "User_id", "User"."createdAt" AS "User_createdAt", "User"."updatedAt" AS "User_updatedAt", "User"."username" AS "User_username", "User"."password" AS "User_password", "User"."salt" AS "User_salt", "User"."firstName" AS "User_firstName", "User"."lastName" AS "User_lastName", "User"."email" AS "User_email", "User"."active" AS "User_active" FROM "user" "User"
+[2024-12-23T19:58:16.948Z][QUERY]: SELECT SCHEMA_NAME() AS "schema_name"
+[2024-12-23T19:58:16.984Z][QUERY]: BEGIN TRANSACTION
+[2024-12-23T19:58:16.988Z][QUERY]: SELECT SCHEMA_NAME() AS "schema_name"
+[2024-12-23T19:58:16.989Z][QUERY]: SELECT DB_NAME() AS "db_name"
+[2024-12-23T19:58:16.991Z][QUERY]: 
+                    SELECT DISTINCT
+                        "TABLE_CATALOG", "TABLE_SCHEMA", "TABLE_NAME"
+                    FROM "friends"."INFORMATION_SCHEMA"."TABLES"
+                    WHERE
+                          "TABLE_TYPE" = 'BASE TABLE' AND
+                          "TABLE_CATALOG" = 'friends' AND
+                          ("TABLE_SCHEMA" = 'dbo' AND "TABLE_NAME" = 'user')
+                
+[2024-12-23T19:58:17.019Z][QUERY]: SELECT * FROM "friends"."INFORMATION_SCHEMA"."TABLES" WHERE "TABLE_NAME" = 'typeorm_metadata' AND "TABLE_SCHEMA" = 'dbo'
+[2024-12-23T19:58:17.031Z][QUERY]: CREATE TABLE "user" ("id" uniqueidentifier NOT NULL CONSTRAINT "DF_cace4a159ff9f2512dd42373760" DEFAULT NEWSEQUENTIALID(), "createdAt" datetime2 NOT NULL CONSTRAINT "DF_e11e649824a45d8ed01d597fd93" DEFAULT getdate(), "updatedAt" datetime2 NOT NULL CONSTRAINT "DF_80ca6e6ef65fb9ef34ea8c90f42" DEFAULT getdate(), "username" varchar(255) NOT NULL, "password" varchar(255) NOT NULL, "salt" varchar(255), "firstName" varchar(255) NOT NULL, "lastName" varchar(255) NOT NULL, "email" varchar(255) NOT NULL, "active" bit NOT NULL CONSTRAINT "DF_843f46779f60b45032874be95b3" DEFAULT 1, CONSTRAINT "UQ_e12875dfb3b1d92d7d7c5377e22" UNIQUE ("email"), CONSTRAINT "UQ_78a916df40e02a9deb1c4b75edb" UNIQUE ("username"), CONSTRAINT "PK_cace4a159ff9f2512dd42373760" PRIMARY KEY ("id"))
+[2024-12-23T19:58:17.043Z][QUERY]: COMMIT
+[2024-12-23T19:59:35.186Z][QUERY]: BEGIN TRANSACTION
+[2024-12-23T19:59:35.202Z][QUERY]: DECLARE @OutputTable TABLE ("id" uniqueidentifier, "createdAt" datetime2, "updatedAt" datetime2, "salt" varchar(255), "active" bit);
+
+INSERT INTO "user"("id", "createdAt", "updatedAt", "username", "password", "salt", "firstName", "lastName", "email", "active") OUTPUT INSERTED."id", INSERTED."createdAt", INSERTED."updatedAt", INSERTED."salt", INSERTED."active" INTO @OutputTable VALUES (DEFAULT, DEFAULT, DEFAULT, @0, @1, DEFAULT, @2, @3, @4, DEFAULT);
+
+SELECT * FROM @OutputTable -- PARAMETERS: [{"value":"Enjuru","type":"varchar","params":[]},{"value":"W@3$%e36","type":"varchar","params":[]},{"value":"Enjuru","type":"varchar","params":[]},{"value":"S. Kuma","type":"varchar","params":[]},{"value":"teste_enj@teste.com","type":"varchar","params":[]}]
+[2024-12-23T19:59:35.223Z][QUERY]: COMMIT
+[2024-12-23T19:59:38.836Z][QUERY]: SELECT "User"."id" AS "User_id", "User"."createdAt" AS "User_createdAt", "User"."updatedAt" AS "User_updatedAt", "User"."username" AS "User_username", "User"."password" AS "User_password", "User"."salt" AS "User_salt", "User"."firstName" AS "User_firstName", "User"."lastName" AS "User_lastName", "User"."email" AS "User_email", "User"."active" AS "User_active" FROM "user" "User"
+[2024-12-23T20:00:17.123Z][QUERY]: BEGIN TRANSACTION
+[2024-12-23T20:00:17.153Z][QUERY]: DECLARE @OutputTable TABLE ("id" uniqueidentifier, "createdAt" datetime2, "updatedAt" datetime2, "salt" varchar(255), "active" bit);
+
+INSERT INTO "user"("id", "createdAt", "updatedAt", "username", "password", "salt", "firstName", "lastName", "email", "active") OUTPUT INSERTED."id", INSERTED."createdAt", INSERTED."updatedAt", INSERTED."salt", INSERTED."active" INTO @OutputTable VALUES (DEFAULT, DEFAULT, DEFAULT, @0, @1, DEFAULT, @2, @3, @4, DEFAULT);
+
+SELECT * FROM @OutputTable -- PARAMETERS: [{"value":"remotelife","type":"varchar","params":[]},{"value":"W@3$%e36","type":"varchar","params":[]},{"value":"Wellyson","type":"varchar","params":[]},{"value":"N. Rocha","type":"varchar","params":[]},{"value":"teste_enj@teste.com","type":"varchar","params":[]}]
+[2024-12-23T20:00:17.209Z][FAILED QUERY]: DECLARE @OutputTable TABLE ("id" uniqueidentifier, "createdAt" datetime2, "updatedAt" datetime2, "salt" varchar(255), "active" bit);
+
+INSERT INTO "user"("id", "createdAt", "updatedAt", "username", "password", "salt", "firstName", "lastName", "email", "active") OUTPUT INSERTED."id", INSERTED."createdAt", INSERTED."updatedAt", INSERTED."salt", INSERTED."active" INTO @OutputTable VALUES (DEFAULT, DEFAULT, DEFAULT, @0, @1, DEFAULT, @2, @3, @4, DEFAULT);
+
+SELECT * FROM @OutputTable -- PARAMETERS: [{"value":"remotelife","type":"varchar","params":[]},{"value":"W@3$%e36","type":"varchar","params":[]},{"value":"Wellyson","type":"varchar","params":[]},{"value":"N. Rocha","type":"varchar","params":[]},{"value":"teste_enj@teste.com","type":"varchar","params":[]}]
+[2024-12-23T20:00:17.209Z][QUERY ERROR]: QueryFailedError: Error: Violation of UNIQUE KEY constraint 'UQ_e12875dfb3b1d92d7d7c5377e22'. Cannot insert duplicate key in object 'dbo.user'. The duplicate key value is (teste_enj@teste.com).
+[2024-12-23T20:00:17.211Z][QUERY]: ROLLBACK
+[2024-12-23T20:00:24.679Z][QUERY]: BEGIN TRANSACTION
+[2024-12-23T20:00:24.681Z][QUERY]: DECLARE @OutputTable TABLE ("id" uniqueidentifier, "createdAt" datetime2, "updatedAt" datetime2, "salt" varchar(255), "active" bit);
+
+INSERT INTO "user"("id", "createdAt", "updatedAt", "username", "password", "salt", "firstName", "lastName", "email", "active") OUTPUT INSERTED."id", INSERTED."createdAt", INSERTED."updatedAt", INSERTED."salt", INSERTED."active" INTO @OutputTable VALUES (DEFAULT, DEFAULT, DEFAULT, @0, @1, DEFAULT, @2, @3, @4, DEFAULT);
+
+SELECT * FROM @OutputTable -- PARAMETERS: [{"value":"remotelife","type":"varchar","params":[]},{"value":"W@3$%e36","type":"varchar","params":[]},{"value":"Wellyson","type":"varchar","params":[]},{"value":"N. Rocha","type":"varchar","params":[]},{"value":"teste@teste.com","type":"varchar","params":[]}]
+[2024-12-23T20:00:24.689Z][QUERY]: COMMIT
+[2024-12-23T20:00:28.643Z][QUERY]: SELECT "User"."id" AS "User_id", "User"."createdAt" AS "User_createdAt", "User"."updatedAt" AS "User_updatedAt", "User"."username" AS "User_username", "User"."password" AS "User_password", "User"."salt" AS "User_salt", "User"."firstName" AS "User_firstName", "User"."lastName" AS "User_lastName", "User"."email" AS "User_email", "User"."active" AS "User_active" FROM "user" "User"
